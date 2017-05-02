@@ -77,7 +77,7 @@ I verified that my perspective transform was working as expected by drawing the 
 
 #### 4. Identify lane-line pixels and fit their positions with a polynomial
 
-`In 10-15 code cells` I tried both histogram (2 on the right) and convolution (left) methods to detect lane lines. I chose histogram as it gives a better result without too much tuning and here is the comparison:
+`In 10-15 code cells` I tried convolution (left), histogram (middle), and histogram that skipped the sliding windows (right) methods to detect lane lines. I chose histogram (middle) as it gives a better result without too much tuning and here is the comparison:
 
 ![alt text][image4]
 
@@ -87,7 +87,7 @@ I verified that my perspective transform was working as expected by drawing the 
 
 #### 6. Plot lane back down onto the road
 
-`In code cell 17` I projected the lane boundaries back onto the road iamge. Here is an example image with lane boundaries, lanes, curvature, and position from center:
+`In code cell 17` I projected the lane boundaries back onto the road images. Here is an example image with lane boundaries, lane curvatures, and position of the vehicle with respect to center:
 
 ![alt text][image6a]
 
@@ -109,6 +109,6 @@ Here's [the link to my output video](./output_video.mp4)
 
 ## Discussion
 
-The `Tips and Tricks for the Project` section of the class gives sevaeral good suggestions about how to improve the result, and I did try to apply some of them. For example, some parameter tunning to make sure the curvature values make sense and the other sanity checks. However, the pipeline might fail due to overfitting those values to our test video `project_video.mp4`. Another step that has lots of room to imporve is the thresholding. For example, s channel is efficient for the test video but cause issues in the other two videos `challenge_video.mp4` and `harder_challenge_video.mp4`. Here are two images extracted from those videos that show those issues:
+The `Tips and Tricks for the Project` section of the class gives several good suggestions about how to improve the result, and I did try to apply some of them. For example, some parameter tunning to make sure the curvature values make sense and the other sanity checks. However, the pipeline might fail due to overfitting those values to our test video `project_video.mp4`. Another step that has lots of room to improve is the color and gradient thresholding. For example, s channel (marked in red color below) is efficient for the test video but cause issues in the other two videos `challenge_video.mp4` and `harder_challenge_video.mp4` due to the complexity of the images. Here are two images extracted from those videos that show those issues:
 
 ![alt text][image7]
