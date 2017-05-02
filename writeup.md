@@ -10,8 +10,8 @@ All code is located in IPython notebook [Advanced_Lane_Lines.ipynb](./Advanced_L
 [image1]:  ./output_images/1.undistort_test.png ""
 [image2]:  ./output_images/2.threshold.png ""
 [image3]:  ./output_images/3.transform.png ""
-[image4]:  ./output_images/4.fit_lines.jpg ""
-[image6a]: ./output_images/6.plot_back.png ""
+[image4]:  ./output_images/4.find_line.jpg ""
+[image6a]: ./output_images/6.plot_back.jpg ""
 [image6b]: ./output_images/6.plot_back_imgs.png ""
 [image7]:  ./output_images/7.issues.png ""
 [video1]:  ./output_video.mp4 ""
@@ -36,7 +36,7 @@ I then used the output `objpoints` and `imgpoints` to compute the camera matrix 
 ![alt text][image1]
 
 #### 2. Create a binary image using color transforms and gradients
-`In code cells 6 and 7` I used a combination of gray color, s channel, and x gradient thresholds to generate a binary image. Here's an example of my output for this step:
+`In code cells 6 and 7` I used a combination of gray color (green), s channel (blue), and x gradient (red) thresholds to generate a binary image. Here's an example of my output for this step:
 
 ![alt text][image2]
 
@@ -91,21 +91,24 @@ I verified that my perspective transform was working as expected by drawing the 
 
 ![alt text][image6a]
 
-`Code cell 18` shows a summary of the pipeline I applied in this projec. Here are images that demonstrat how each stage works:
+And here are images that demonstrate a summary of how each stage works:
 
 ![alt text][image6b]
 
 
 ## Pipeline (video)
-#### Sanity check
 
-#### Final video output
+`In code cell 18` It shows how I implemented this project. All steps are the same for test images and the video, except in the video there are additional sanity checks and reset of lane boundaries. Some basic rules check if:
 
-Here's a [link to my video result](./output_video.mp4)
+* curvature values make sense
+* left and right lanes are roughly parallel
+* boundarie in current frame doesn't jump too much from the previous one
+
+Here's [the link to my output video](./output_video.mp4)
 
 
 ## Discussion
 
-#### Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
+The `Tips and Tricks for the Project` section of the class gives sevaeral good suggestions about how to improve the result, and I did try to apply some of them. For example, some parameter tunning to make sure the curvature values make sense and the other sanity checks. However, the pipeline might fail due to overfitting those values to our test video `project_video.mp4`. Another step that has lots of room to imporve is the thresholding. For example, s channel is efficient for the test video but cause issues in the other two videos `challenge_video.mp4` and `harder_challenge_video.mp4`. Here are two images extracted from those videos that show those issues:
 
-Here I'll talk about the approach I took, what techniques I used, what worked and why, where the pipeline might fail and how I might improve it if I were going to pursue this project further.  
+![alt text][image7]
